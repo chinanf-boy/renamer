@@ -1,72 +1,73 @@
+
 [![view on npm](http://img.shields.io/npm/v/renamer.svg)](https://www.npmjs.org/package/renamer)
 [![npm module downloads](http://img.shields.io/npm/dt/renamer.svg)](https://www.npmjs.org/package/renamer)
 [![Build Status](https://travis-ci.org/75lb/renamer.svg)](https://travis-ci.org/75lb/renamer)
 [![Dependency Status](https://david-dm.org/75lb/renamer.svg)](https://david-dm.org/75lb/renamer)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
-renamer
-=======
-Batch rename files and folders.
+# 更名
 
-Install
--------
-Install [node](https://nodejs.org) then:
+批量重命名文件和文件夹. 
+
+## 安装
+
+安装[节点](https://nodejs.org)然后: 
+
 ```sh
 $ npm install -g renamer
 ```
-*Linux/Mac users may need to run the above with `sudo`*
 
-Usage
------
-```
-  renamer
-  Batch rename files and folders.
+_linux / mac用户可能需要运行上面的`sudo`_
 
-  Usage
-  $ renamer <options> <files>
+## 用法
 
-  -f, --find <string>      The find string, or regular expression when --regex is set. If not set, the whole filename will be replaced.
-  -r, --replace <string>   The replace string. With --regex set, --replace can reference parenthesised substrings from --find with $1, $2, $3
-                           etc. If omitted, defaults to a blank string. The special token '{{index}}' will insert an incrementing number per
-                           file processed.
-  -e, --regex              When set, --find is interpreted as a regular expression.
-  -d, --dry-run            Used for test runs. Set this to do everything but rename the file.
-  -i, --insensitive        Enable case-insensitive finds.
-  -v, --verbose            Use to print additional information.
-  -h, --help               Print usage instructions.
+      renamer
+      Batch rename files and folders.
 
-  for more detailed instructions, visit https://github.com/75lb/renamer
-```
+      Usage
+      $ renamer <options> <files>
 
-For more information on Regular Expressions, see [this useful guide](https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions).
+      -f, --find <string>      The find string, or regular expression when --regex is set. If not set, the whole filename will be replaced.
+      -r, --replace <string>   The replace string. With --regex set, --replace can reference parenthesised substrings from --find with $1, $2, $3
+                               etc. If omitted, defaults to a blank string. The special token '{{index}}' will insert an incrementing number per
+                               file processed.
+      -e, --regex              When set, --find is interpreted as a regular expression.
+      -d, --dry-run            Used for test runs. Set this to do everything but rename the file.
+      -i, --insensitive        Enable case-insensitive finds.
+      -v, --verbose            Use to print additional information.
+      -h, --help               Print usage instructions.
 
-**Don't forget to test your rename procedure first using `--dry-run`!**
+      for more detailed instructions, visit https://github.com/75lb/renamer
 
-Recursing
----------
-Renamer comes with globbing support built in (provided by [node-glob](https://github.com/isaacs/node-glob), enabling recursive operations. To recurse, use the `**` wildcard where a directory name would appear to apply the meaning "any directory, including this one".
+有关正则表达式的更多信息,请参阅[这个有用的指南](https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions). 
 
-For example, this command operates on all `js` files in the current directory:
+**不要忘记先测试你的重命名过程`--dry-run`!**
+
+## 递归
+
+重命名器内置globbing支持 (由...提供[node-glob](https://github.com/isaacs/node-glob),启用递归操作. 为了缓解,使用`**`通配符,其中目录名似乎应用"任何目录,包括这个"的含义. 
+
+例如,该命令对所有操作`JS`当前目录中的文件: 
 
     $ renamer --find this --replace that '*.js'
 
-this command operates on all `js` files, recursively:
+此命令对所有操作`JS`文件,递归地: 
 
     $ renamer --find this --replace that '**/*.js'
 
-this command operates on all `js` files from the `lib` directory downward:
+此命令对所有操作`JS`文件从`LIB`目录向下: 
 
     $ renamer --find this --replace that 'lib/**/*.js'
 
-**Bash users without globstar will need to enclose the glob expression in quotes to prevent native file expansion**, i.e. `'**/*.js'`
+**没有globstar的bash用户需要将glob表达式用引号括起来以防止本地文件扩展**即`'** / *. JS'`
 
-Examples
---------
-Some real-world examples.
+## 例子
 
-**Windows users**: the single-quotation marks used in the example commands below are for bash (Mac/Linux) users, please replace these with double-quotation marks on Windows.
+一些真实世界的例子. 
 
-### Simple replace
+**Windows用户**: 以下示例命令中使用的单引号用于bash (mac / linux) 用户,请在Windows上用双引号将其替换. 
+
+### 简单替换
 
 ```sh
 $ renamer --find '[bad]' --replace '[good]' *
@@ -88,11 +89,12 @@ $ renamer --find '[bad]' --replace '[good]' *
     </tbody>
 </table>
 
-### Case insenstive finds
+### 不区分大小写的发现
 
 ```sh
 $ renamer --insensitive --find 'mpeg4' --replace 'mp4' *
 ```
+
 <table>
     <thead>
         <tr><th>Before</th><th>After</th></tr>
@@ -109,7 +111,7 @@ $ renamer --insensitive --find 'mpeg4' --replace 'mp4' *
     </tbody>
 </table>
 
-### Strip out unwanted text
+### 去掉不需要的文字
 
 ```sh
 $ renamer --find 'Season 1 - ' *
@@ -131,7 +133,7 @@ $ renamer --find 'Season 1 - ' *
     </tbody>
 </table>
 
-### Simple filename cleanup
+### 简单的文件名清理
 
 ```sh
 $ renamer --regex --find '.*_(\d+)_.*' --replace 'Video $1.mp4' *
@@ -155,7 +157,7 @@ $ renamer --regex --find '.*_(\d+)_.*' --replace 'Video $1.mp4' *
     </tbody>
 </table>
 
-### Give your images a new numbering scheme
+### 给你的图片一个新的编号方案
 
 ```sh
 $ renamer --replace 'Image{{index}}.jpg' *
@@ -179,7 +181,7 @@ $ renamer --replace 'Image{{index}}.jpg' *
     </tbody>
 </table>
 
-### do something about all those full stops
+### 对所有这些完全停止做一些事情
 
 ```sh
 $ renamer --regex --find '\.(?!\w+$)' --replace ' ' *
@@ -201,7 +203,8 @@ $ renamer --regex --find '\.(?!\w+$)' --replace ' ' *
     </tbody>
 </table>
 
-### if not already done, add your name to a load of files
+### 如果尚未完成,请将您的名称添加到一个文件加载中
+
 ```sh
 $ renamer --regex --find '(data\d)(\.\w+)' --replace '$1 (checked by Lloyd)$2' *
 ```
@@ -224,8 +227,7 @@ $ renamer --regex --find '(data\d)(\.\w+)' --replace '$1 (checked by Lloyd)$2' *
     </tbody>
 </table>
 
-
-### rename files and folders, recursively
+### 递归地重命名文件和文件夹
 
 ```sh
 $ renamer --find 'pic' --replace 'photo' '**'
@@ -254,7 +256,7 @@ $ renamer --find 'pic' --replace 'photo' '**'
     </tbody>
 </table>
 
-### prefix files and folders, recursively
+### 前缀文件和文件夹,递归
 
 ```sh
 $ renamer --regex --find '^' --replace 'good-' '**'
@@ -285,4 +287,4 @@ $ renamer --regex --find '^' --replace 'good-' '**'
 
 * * *
 
-&copy; 2012-18 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).
+©2012-18劳埃德布鲁克斯\\[75pound@gmail.com \\](mailto:75pound@gmail.com\). 由...记录[jsdoc到降价](https://github.com/75lb/jsdoc-to-markdown). 
